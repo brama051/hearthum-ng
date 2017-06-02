@@ -18,4 +18,9 @@ export class SidebarComponent {
             this.showMenu = element;
         }
     }
+    toggleSidebar() {
+        const dom: any = document.querySelector('body');
+        dom.classList.toggle('push-right');
+    }
+
 }
