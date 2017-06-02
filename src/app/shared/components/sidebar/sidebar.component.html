@@ -1,6 +1,6 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <ul class="list-group">
-        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <!--<a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'dashboard' | translate }}
         </a>
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
@@ -41,9 +41,21 @@
         </div>
         <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'blankPage' | translate }}
+        </a>-->
+        <a [routerLink]="['/recorder']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-circle"></i>&nbsp;{{ 'recorder' | translate }}
         </a>
-        <a class="list-group-item more-themes" href="http://www.strapui.com/" >
-            {{ 'moretheme' | translate }}
+        <a [routerLink]="['/recording-history']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-history"></i>&nbsp;{{ 'recordingHistory' | translate }}
+        </a>
+        <a [routerLink]="['/analyzed-recordings']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-check-square-o"></i>&nbsp;{{ 'analyzedRecordings' | translate }}
+        </a>
+        <a [routerLink]="['/education']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-book"></i>&nbsp;{{ 'education' | translate }}
+        </a>
+        <a [routerLink]="['/settings']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-cog"></i>&nbsp;{{ 'settings' | translate }}
         </a>
     </ul>
 </nav>

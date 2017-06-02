@@ -11,5 +11,10 @@
     "blankpage": "Blank Page",
     "moretheme": "More Themes",
     "downloadNow": "Download Now",
-    "language": "Language"
+    "language": "Language",
+    "recorder": "Recorder",
+    "recordingHistory": "RecordingHistory",
+    "analyzedRecordings": "Analyzed Recordings",
+    "education": "Edu Material",
+    "settings": "Settings"
 }

@@ -1,0 +1,35 @@
+
+
+
+<div class="row" *ngIf="!recordingStarted">
+    <div class="col-lg-12">
+        <p class="text-center">Here is where the graph will show up once you start recording.</p>
+    </div>
+</div>
+<div style="overflow-x: auto; overflow-y: hidden;" *ngIf="recordingStarted" class="mh-100">
+    <!--<img src="http://via.placeholder.com/2000x450&text=_____________________graph_____________________" alt="">-->
+    <img src="http://cloudinary-res.cloudinary.com/image/upload/waveform_post.png" alt=""  height="400px">
+</div>
+<!--<audio controls *ngIf="recordingStarted">
+    <source src="https://www.freesound.org/data/previews/146/146765_1417288-lq.ogg" type="audio/ogg">
+    <source src="https://www.freesound.org/data/previews/146/146765_1417288-lq.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>-->
+<br/>
+<br/>
+
+<nav class="navbar fixed-bottom navbar-light" style="z-index: 900;">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <!--Recorder-->
+        <button type="button" class="btn btn-outline-danger w-100" *ngIf="!recordingStarted && !recordingFinished" (click)="startRecording()"><i class="fa fa-circle-o"></i> Start Recording</button>
+        <button type="button" class="btn btn-outline-danger w-100 active" *ngIf="recordingStarted && !recordingFinished" (click)="stopRecording()"><i class="fa fa-circle"></i> Stop Recording</button>
+        <!--Player-->
+        <button type="button" class="btn btn-outline-primary w-25" *ngIf="recordingFinished" (click)="saveRecording()"><i class="fa fa-save"></i> Save</button>
+        <button type="button" class="btn btn-outline-primary w-50" *ngIf="recordingFinished && !playingActive" (click)="playerPlay()"><i class="fa fa-play"></i> Play</button>
+        <button type="button" class="btn btn-outline-primary w-50 active" *ngIf="recordingFinished && playingActive" (click)="playerPause()"><i class="fa fa-pause"></i> Pause</button>
+        <button type="button" class="btn btn-outline-primary w-25" *ngIf="recordingFinished" (click)="discardRecording()"><i class="fa fa-trash-o"></i> Discard</button>
+
+
+    </div>
+</nav>
+
