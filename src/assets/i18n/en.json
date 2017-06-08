@@ -16,5 +16,6 @@
     "recordingHistory": "RecordingHistory",
     "analyzedRecordings": "Analyzed Recordings",
     "education": "Edu Material",
-    "settings": "Settings"
+    "settings": "Settings",
+    "logout": "Logout"
 }
