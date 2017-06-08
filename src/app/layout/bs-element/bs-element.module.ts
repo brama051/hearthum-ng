@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { BsElementRoutingModule } from './bs-element-routing.module';
-import { BsElementComponent } from './bs-element.component';
-import { PageHeaderModule } from './../../shared';
+import {BsElementRoutingModule} from './bs-element-routing.module';
+import {BsElementComponent} from './bs-element.component';
+import {PageHeaderModule} from './../../shared';
 
 @NgModule({
     imports: [
@@ -13,4 +13,5 @@ import { PageHeaderModule } from './../../shared';
     ],
     declarations: [BsElementComponent]
 })
-export class BsElementModule { }
+export class BsElementModule {
+}

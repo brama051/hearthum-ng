@@ -1,49 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-recorder',
-  templateUrl: './recorder.component.html',
-  styleUrls: ['./recorder.component.scss']
+    selector: 'app-recorder',
+    templateUrl: './recorder.component.html',
+    styleUrls: ['./recorder.component.scss']
 })
 export class RecorderComponent implements OnInit {
-  public audio = new Audio();
-  public recordingStarted = false;
-  public recordingFinished = false;
-  public playingActive = false;
-  constructor() {
-      this.audio.src = 'https://www.freesound.org/data/previews/146/146765_1417288-lq.mp3';
-  }
-  ngOnInit() {
-  }
-  public startRecording() {
-      this.recordingStarted = true;
-  }
+    public audio = new Audio();
+    public recordingStarted = false;
+    public recordingFinished = false;
+    public playingActive = false;
 
-  public stopRecording() {
-    this.recordingFinished = true;
-  }
+    constructor() {
+        this.audio.src = 'https://www.freesound.org/data/previews/146/146765_1417288-lq.mp3';
+    }
 
-  public playerPlay() {
-      this.playingActive = true;
-      this.audio.play();
-  }
+    ngOnInit() {
+    }
 
-  public playerPause() {
-      this.playingActive = false;
-      this.audio.pause();
-  }
+    public cmdStartRecording() {
+        this.recordingStarted = true;
+    }
 
-  public saveRecording() {
-      // todo: call popup with form
-      this.playingActive = false;
-      this.recordingFinished = false;
-      this.recordingStarted = false;
-  }
+    public cmdStopRecording() {
+        this.recordingFinished = true;
+    }
 
-  public discardRecording() {
-      // todo: remove recording from memory
-      this.playingActive = false;
-      this.recordingFinished = false;
-      this.recordingStarted = false;
-  }
+    public cmdPlayerPlay() {
+        this.playingActive = true;
+        this.audio.play();
+    }
+
+    public cmdPlayerPause() {
+        this.playingActive = false;
+        this.audio.pause();
+    }
+
+    public cmdSaveRecording() {
+        // todo: call popup with form
+        this.playingActive = false;
+        this.recordingFinished = false;
+        this.recordingStarted = false;
+    }
+
+    public cmdDiscardRecording() {
+        // todo: remove recording from memory
+        this.playingActive = false;
+        this.recordingFinished = false;
+        this.recordingStarted = false;
+    }
 }

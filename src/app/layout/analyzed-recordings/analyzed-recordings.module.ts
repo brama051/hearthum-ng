@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AnalyzedRecordingsRoutingModule } from './analyzed-recordings-routing.module';
-import { AnalyzedRecordingsComponent } from './analyzed-recordings.component';
+import {AnalyzedRecordingsRoutingModule} from './analyzed-recordings-routing.module';
+import {AnalyzedRecordingsComponent} from './analyzed-recordings.component';
 
 @NgModule({
-  imports: [
-      CommonModule,
-      AnalyzedRecordingsRoutingModule
-  ],
-  declarations: [AnalyzedRecordingsComponent]
+    imports: [
+        CommonModule,
+        AnalyzedRecordingsRoutingModule
+    ],
+    declarations: [AnalyzedRecordingsComponent]
 })
-export class AnalyzedRecordingsModule { }
+export class AnalyzedRecordingsModule {
+}

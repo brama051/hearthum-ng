@@ -1,9 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { BsComponentComponent } from './bs-component.component';
+import {BsComponentComponent} from './bs-component.component';
 import {
     AlertComponent,
     ButtonsComponent,
@@ -18,47 +18,47 @@ import {
     TooltipComponent,
     TimepickerComponent,
 } from './components';
-import { PageHeaderModule } from '../../shared';
+import {PageHeaderModule} from '../../shared';
 
 describe('BsComponentComponent', () => {
-  let component: BsComponentComponent;
-  let fixture: ComponentFixture<BsComponentComponent>;
+    let component: BsComponentComponent;
+    let fixture: ComponentFixture<BsComponentComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgbModule.forRoot(),
-        PageHeaderModule
-      ],
-      declarations: [
-        BsComponentComponent,
-        ButtonsComponent,
-        AlertComponent,
-        ModalComponent,
-        CollapseComponent,
-        DatePickerComponent,
-        DropdownComponent,
-        PaginationComponent,
-        PopOverComponent,
-        ProgressbarComponent,
-        TabsComponent,
-        TooltipComponent,
-        TimepickerComponent
-      ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule,
+                FormsModule,
+                ReactiveFormsModule,
+                NgbModule.forRoot(),
+                PageHeaderModule
+            ],
+            declarations: [
+                BsComponentComponent,
+                ButtonsComponent,
+                AlertComponent,
+                ModalComponent,
+                CollapseComponent,
+                DatePickerComponent,
+                DropdownComponent,
+                PaginationComponent,
+                PopOverComponent,
+                ProgressbarComponent,
+                TabsComponent,
+                TooltipComponent,
+                TimepickerComponent
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BsComponentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BsComponentComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

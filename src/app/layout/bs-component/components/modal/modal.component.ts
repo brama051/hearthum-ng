@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-modal',
@@ -8,7 +8,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalComponent {
     closeResult: string;
-    constructor(private modalService: NgbModal) { }
+
+    constructor(private modalService: NgbModal) {
+    }
 
     open(content) {
         this.modalService.open(content).result.then((result) => {
@@ -24,7 +26,7 @@ export class ModalComponent {
         } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
             return 'by clicking on a backdrop';
         } else {
-            return  `with: ${reason}`;
+            return `with: ${reason}`;
         }
     }
 }

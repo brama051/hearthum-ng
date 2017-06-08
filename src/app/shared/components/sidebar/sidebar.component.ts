@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit {
     eventCalled() {
         this.isActive = !this.isActive;
     }
+
     addExpandClass(element: any) {
         if (element === this.showMenu) {
             this.showMenu = '0';
@@ -34,6 +35,7 @@ export class SidebarComponent implements OnInit {
             this.showMenu = element;
         }
     }
+
     toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle('push-right');

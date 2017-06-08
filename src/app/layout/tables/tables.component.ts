@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-tables',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-    constructor() { }
-    ngOnInit() { }
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
 }

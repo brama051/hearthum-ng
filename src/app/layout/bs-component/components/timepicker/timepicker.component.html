@@ -43,20 +43,21 @@
             <div class="card-header">Timepicker (<b>Custom Step</b>)</div>
             <div class="card-block">
                 <ngb-timepicker [(ngModel)]="customTime" [seconds]="true"
-                [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep"></ngb-timepicker>
+                                [hourStep]="hourStep" [minuteStep]="minuteStep"
+                                [secondStep]="secondStep"></ngb-timepicker>
 
                 <div class="row">
                     <div class="col-sm-4">
                         <label for="changeHourStep">Hour Step</label>
-                        <input type="number" class="form-control" [(ngModel)]="hourStep" />
+                        <input type="number" class="form-control" [(ngModel)]="hourStep"/>
                     </div>
                     <div class="col-sm-4">
                         <label for="changeMinuteStep">Minute Step</label>
-                        <input type="number" class="form-control" [(ngModel)]="minuteStep" />
+                        <input type="number" class="form-control" [(ngModel)]="minuteStep"/>
                     </div>
                     <div class="col-sm-4">
                         <label for="changeSecondStep">Second Step</label>
-                        <input type="number" class="form-control" [(ngModel)]="secondStep" />
+                        <input type="number" class="form-control" [(ngModel)]="secondStep"/>
                     </div>
                 </div>
                 <div class="alert alert-info mt-3 mb-0">

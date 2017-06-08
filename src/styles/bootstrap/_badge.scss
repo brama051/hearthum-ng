@@ -4,38 +4,39 @@
 // `background-color`.
 
 .badge {
-  display: inline-block;
-  padding: $badge-padding-y $badge-padding-x;
-  font-size: $badge-font-size;
-  font-weight: $badge-font-weight;
-  line-height: 1;
-  color: $badge-color;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  @include border-radius();
+    display: inline-block;
+    padding: $badge-padding-y $badge-padding-x;
+    font-size: $badge-font-size;
+    font-weight: $badge-font-weight;
+    line-height: 1;
+    color: $badge-color;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    @include border-radius();
 
-  // Empty badges collapse automatically
-  &:empty {
-    display: none;
-  }
+    // Empty badges collapse automatically
+    &:empty {
+        display: none;
+    }
 }
 
 // Quick fix for badges in buttons
 .btn .badge {
-  position: relative;
-  top: -1px;
+    position: relative;
+    top: -1px;
 }
 
 // scss-lint:disable QualifyingElement
 // Add hover effects, but only for links
 a.badge {
-  @include hover-focus {
-    color: $badge-link-hover-color;
-    text-decoration: none;
-    cursor: pointer;
-  }
+    @include hover-focus {
+        color: $badge-link-hover-color;
+        text-decoration: none;
+        cursor: pointer;
+    }
 }
+
 // scss-lint:enable QualifyingElement
 
 // Pill badges
@@ -43,9 +44,9 @@ a.badge {
 // Make them extra rounded with a modifier to replace v3's badges.
 
 .badge-pill {
-  padding-right: $badge-pill-padding-x;
-  padding-left: $badge-pill-padding-x;
-  @include border-radius($badge-pill-border-radius);
+    padding-right: $badge-pill-padding-x;
+    padding-left: $badge-pill-padding-x;
+    @include border-radius($badge-pill-border-radius);
 }
 
 // Colors
@@ -53,25 +54,25 @@ a.badge {
 // Contextual variations (linked badges get darker on :hover).
 
 .badge-default {
-  @include badge-variant($badge-default-bg);
+    @include badge-variant($badge-default-bg);
 }
 
 .badge-primary {
-  @include badge-variant($badge-primary-bg);
+    @include badge-variant($badge-primary-bg);
 }
 
 .badge-success {
-  @include badge-variant($badge-success-bg);
+    @include badge-variant($badge-success-bg);
 }
 
 .badge-info {
-  @include badge-variant($badge-info-bg);
+    @include badge-variant($badge-info-bg);
 }
 
 .badge-warning {
-  @include badge-variant($badge-warning-bg);
+    @include badge-variant($badge-warning-bg);
 }
 
 .badge-danger {
-  @include badge-variant($badge-danger-bg);
+    @include badge-variant($badge-danger-bg);
 }

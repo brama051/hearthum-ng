@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { StatComponent } from './stat.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {StatComponent} from './stat.component';
 
 @NgModule({
     imports: [
@@ -9,4 +9,5 @@ import { StatComponent } from './stat.component';
     declarations: [StatComponent],
     exports: [StatComponent]
 })
-export class StatModule { }
+export class StatModule {
+}

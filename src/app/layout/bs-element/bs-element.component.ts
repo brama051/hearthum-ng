@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-bs-element',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./bs-element.component.scss']
 })
 export class BsElementComponent implements OnInit {
-    constructor() { }
-    ngOnInit() { }
+    constructor() {
+    }
+
+    ngOnInit() {
+    }
 }

@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule, Http} from '@angular/http';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AuthGuard } from './shared';
-import { AuthService } from './shared/services/auth.service';
-import { CallbackComponent } from './callback/callback.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AuthGuard} from './shared';
+import {AuthService} from './shared/services/auth.service';
+import {CallbackComponent} from './callback/callback.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -37,4 +37,5 @@ export function HttpLoaderFactory(http: Http) {
     providers: [AuthGuard, AuthService],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { TablesComponent } from './tables.component';
-import { TablesRoutingModule } from './tables-routing.module';
-import { PageHeaderModule } from './../../shared';
+import {TablesComponent} from './tables.component';
+import {TablesRoutingModule} from './tables-routing.module';
+import {PageHeaderModule} from './../../shared';
 
 @NgModule({
     imports: [
@@ -13,4 +13,5 @@ import { PageHeaderModule } from './../../shared';
     ],
     declarations: [TablesComponent]
 })
-export class TablesModule { }
+export class TablesModule {
+}

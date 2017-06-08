@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-dashboard',
@@ -40,7 +40,9 @@ export class DashboardComponent implements OnInit {
                 voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`,
         });
     }
-    ngOnInit() {}
+
+    ngOnInit() {
+    }
 
     public closeAlert(alert: any) {
         const index: number = this.alerts.indexOf(alert);

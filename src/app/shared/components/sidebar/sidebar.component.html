@@ -51,19 +51,24 @@
         <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'blankPage' | translate }}
         </a>-->
-        <a [routerLink]="['/recorder']" [routerLinkActive]="['router-link-active']" class="list-group-item" (click)="toggleSidebar()">
+        <a [routerLink]="['/recorder']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+           (click)="toggleSidebar()">
             <i class="fa fa-circle"></i>&nbsp;{{ 'recorder' | translate }}
         </a>
-        <a [routerLink]="['/recording-history']" [routerLinkActive]="['router-link-active']" class="list-group-item" (click)="toggleSidebar()">
+        <a [routerLink]="['/recording-history']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+           (click)="toggleSidebar()">
             <i class="fa fa-history"></i>&nbsp;{{ 'recordingHistory' | translate }}
         </a>
-        <a [routerLink]="['/analyzed-recordings']" [routerLinkActive]="['router-link-active']" class="list-group-item" (click)="toggleSidebar()">
+        <a [routerLink]="['/analyzed-recordings']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+           (click)="toggleSidebar()">
             <i class="fa fa-check-square-o"></i>&nbsp;{{ 'analyzedRecordings' | translate }}
         </a>
-        <a [routerLink]="['/education']" [routerLinkActive]="['router-link-active']" class="list-group-item" (click)="toggleSidebar()">
+        <a [routerLink]="['/education']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+           (click)="toggleSidebar()">
             <i class="fa fa-book"></i>&nbsp;{{ 'education' | translate }}
         </a>
-        <a [routerLink]="['/settings']" [routerLinkActive]="['router-link-active']" class="list-group-item" (click)="toggleSidebar()">
+        <a [routerLink]="['/settings']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+           (click)="toggleSidebar()">
             <i class="fa fa-cog"></i>&nbsp;{{ 'settings' | translate }}
         </a>
         <a class="list-group-item" (click)="auth.logout()">

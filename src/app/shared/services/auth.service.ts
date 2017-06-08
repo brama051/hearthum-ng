@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import auth0 from 'auth0-js';
@@ -15,7 +15,8 @@ export class AuthService {
     });
     userProfile: any;
 
-    constructor(public router: Router, private route: ActivatedRoute) {}
+    constructor(public router: Router, private route: ActivatedRoute) {
+    }
 
     public login(): void {
         this.auth0.authorize();
