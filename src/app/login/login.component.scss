@@ -87,4 +87,13 @@ $topnav-background-color: #222;
                 border-radius: 50%;
         border: 2px solid #FFF;
     }
+    .circle {
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.8);
+        background: #222;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        font-size: 100px;
+        line-height: 100px;
+        padding: 15px;
+    }
 }
