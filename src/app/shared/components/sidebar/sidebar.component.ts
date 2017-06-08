@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -6,11 +6,22 @@ import {AuthService} from '../../services/auth.service';
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
     isActive = false;
     showMenu = '';
+    profile: any;
 
     constructor(public auth: AuthService) {
+    }
+
+    ngOnInit() {
+        if (this.auth.userProfile) {
+            this.profile = this.auth.userProfile;
+        } else {
+            this.auth.getProfile((err, profile) => {
+                this.profile = profile;
+            });
+        }
     }
 
     eventCalled() {

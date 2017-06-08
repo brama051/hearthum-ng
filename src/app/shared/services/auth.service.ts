@@ -11,8 +11,9 @@ export class AuthService {
         responseType: 'token id_token',
         audience: 'https://hearthum.eu.auth0.com/userinfo',
         redirectUri: 'http://localhost:4200/callback',
-        scope: 'openid'
+        scope: 'openid profile'
     });
+    userProfile: any;
 
     constructor(public router: Router, private route: ActivatedRoute) {}
 
@@ -64,4 +65,19 @@ export class AuthService {
         return new Date().getTime() < expiresAt;
     }
 
+    public getProfile(cb): void {
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+            throw new Error('Access token must exist to fetch profile');
+        }
+
+        const self = this;
+        this.auth0.client.userInfo(accessToken, (err, profile) => {
+            if (profile) {
+                self.userProfile = profile;
+                console.log(profile);
+            }
+            cb(err, profile);
+        });
+    }
 }

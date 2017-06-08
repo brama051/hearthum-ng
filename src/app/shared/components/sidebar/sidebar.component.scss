@@ -37,6 +37,17 @@ $topnav-background-color: #222;
             color: #fff;
         }
     }
+    .profile-userpic {
+        float: none;
+        margin: 0 auto;
+        -webkit-border-radius: 50% !important;
+        -moz-border-radius: 50% !important;
+        border-radius: 50% !important;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        font-size: 100px;
+        line-height: 100px;
+        width: 100px;
+    }
     .sidebar-dropdown{
         *:focus{
             border-radius: none;
@@ -87,6 +98,7 @@ $topnav-background-color: #222;
                 }
             }
         }
+
     }
 }
 .nested-menu {

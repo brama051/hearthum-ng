@@ -1,8 +1,11 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <div class="row">
         <div class="col text-white text-center">
-            <i class="fa fa-user fa-4x"></i>
-            <p>Welcome, Lord Commander</p>
+            <img src="{{ profile?.picture }}" alt="User profile image" class="profile-userpic"/>
+            <!--<i class="fa fa-user fa-4x circle profile-userpic"></i>-->
+
+            <p>Welcome, {{ profile?.given_name }}</p>
+
         </div>
     </div>
     <ul class="list-group">
