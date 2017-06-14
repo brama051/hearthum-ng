@@ -10,7 +10,7 @@
 
 <br/>
 <br/>
-
+<p>{{saveModal.closeResult}}</p>
 <nav class="navbar fixed-bottom navbar-light" style="z-index: 900;">
     <div class="btn-group" role="group" aria-label="Basic example">
         <!--Recorder-->
@@ -22,7 +22,7 @@
         </button>
         <!--Player-->
         <button type="button" class="btn btn-outline-primary w-25" *ngIf="recordingFinished"
-                (click)="cmdSaveRecording()"><i class="fa fa-save"></i> Save
+                (click)="cmdSaveRecording()"><i class="fa fa-save"></i>
         </button>
         <button type="button" class="btn btn-outline-primary w-50" *ngIf="recordingFinished && !playingActive"
                 (click)="cmdPlayerPlay()"><i class="fa fa-play"></i> Play
@@ -31,10 +31,11 @@
                 (click)="cmdPlayerPause()"><i class="fa fa-pause"></i> Pause
         </button>
         <button type="button" class="btn btn-outline-primary w-25" *ngIf="recordingFinished"
-                (click)="cmdDiscardRecording()"><i class="fa fa-trash-o"></i> Discard
+                (click)="cmdDiscardRecording()"><i class="fa fa-trash-o"></i>
         </button>
 
 
     </div>
 </nav>
+<app-save-modal></app-save-modal>
 

@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {SaveModalComponent} from './components/save-modal/save-modal.component';
 declare const navigator: any;
 declare const MediaRecorder: any;
 
@@ -15,7 +16,9 @@ export class RecorderComponent implements OnInit {
     // --
     private chunks: any = [];
     private mediaRecorder: any;
-
+    // --
+    @ViewChild(SaveModalComponent) saveModal: SaveModalComponent;
+    // --
     constructor() {
     }
 
@@ -23,14 +26,8 @@ export class RecorderComponent implements OnInit {
         const onSuccess = stream => {
             this.mediaRecorder = new MediaRecorder(stream);
             this.mediaRecorder.onstop = e => {
-                this.audio = new Audio();
-                this.audio.onended = er => {
-                    console.log('kraj snimke');
-                    console.log(er);
-                    this.playingActive = false;
-                }
-                const blob = new Blob(this.chunks, { 'type': 'audio/wav;' });
-                this.chunks.length = 0;
+                const blob = new Blob(this.chunks, {'type': 'audio/wav;'});
+                this.chunks = [];
                 this.audio.src = window.URL.createObjectURL(blob);
                 this.audio.load();
             };
@@ -43,11 +40,14 @@ export class RecorderComponent implements OnInit {
         navigator.mozGetUserMedia ||
         navigator.msGetUserMedia);
 
-        navigator.getUserMedia({ audio: true }, onSuccess, e => console.log(e));
-
+        navigator.getUserMedia({audio: true}, onSuccess, e => console.log(e));
     }
 
     public cmdStartRecording() {
+        this.audio = new Audio();
+        this.audio.onended = er => {
+            this.playingActive = false;
+        };
         this.recordingStarted = true;
         this.mediaRecorder.start();
     }
@@ -72,6 +72,7 @@ export class RecorderComponent implements OnInit {
         this.playingActive = false;
         this.recordingFinished = false;
         this.recordingStarted = false;
+        this.saveModal.open();
     }
 
     public cmdDiscardRecording() {

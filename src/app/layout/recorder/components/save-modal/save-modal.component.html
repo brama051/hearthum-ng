@@ -1,0 +1,40 @@
+<ng-template #childModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Save info ...</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <fieldset class="form-group">
+                <label>Patient Name</label>
+                <input class="form-control" />
+                <p class="help-block">Example block-level help text here.</p>
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Recording position</label>
+                <select name="" id="" class="form-control">
+                    <option value="">...</option>
+                </select>
+                <p class="help-block">Example block-level help text here.</p>
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Date of recording</label>
+                <input type="datetime-local" class="form-control" />
+                <p class="help-block">Example block-level help text here.</p>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<!--
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+
+<hr>
+
+<pre>{{closeResult}}</pre>
+-->
