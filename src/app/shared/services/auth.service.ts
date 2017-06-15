@@ -10,7 +10,7 @@ export class AuthService {
         domain: 'hearthum.eu.auth0.com',
         responseType: 'token id_token',
         audience: 'https://hearthum.eu.auth0.com/userinfo',
-        redirectUri: 'http://localhost:4200/callback',
+        redirectUri: 'https://hearthum-ng.herokuapp.com/callback',
         scope: 'openid profile'
     });
     userProfile: any;
@@ -29,10 +29,7 @@ export class AuthService {
                 window.location.hash = '';
                 this.setSession(authResult);
                 console.log('attempting to redirect to: /recorder');
-                // this.router.navigate(['/redirect']);
                 window.location.href = '';
-                // this.router.navigate(['']);
-                // this.router.navigateByUrl('/');
             } else if (err) {
                 console.log('error on handling authentication');
                 this.router.navigate(['/login']);
