@@ -19,6 +19,7 @@ export class RecorderComponent implements OnInit {
     // --
     @ViewChild(SaveModalComponent) saveModal: SaveModalComponent;
     // --
+    // private wavesurfer: WaveSurfer;
     constructor() {
     }
 
