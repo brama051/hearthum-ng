@@ -29,6 +29,7 @@ export class RecorderComponent implements OnInit {
             this.mediaRecorder = new MediaRecorder(stream);
             this.mediaRecorder.onstop = e => {
                 const blob = new Blob(this.chunks, {'type': 'audio/wav;'});
+                this.wavesurfer.loadBlob(blob);
                 this.chunks = [];
                 this.audio.src = window.URL.createObjectURL(blob);
                 this.audio.load();
@@ -49,7 +50,7 @@ export class RecorderComponent implements OnInit {
             waveColor: 'red',
             progressColor: 'purple'
         });
-        this.wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+        // this.wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
 
     }
 
