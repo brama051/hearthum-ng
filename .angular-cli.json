@@ -21,7 +21,7 @@
             "prefix": "app",
             "styles": [
                 "../node_modules/font-awesome/css/font-awesome.css",
-                "styles/app.scss"
+                "./src/styles/app.scss"
             ],
             "scripts": [
                 "../node_modules/chart.js/dist/Chart.js",
