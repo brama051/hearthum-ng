@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "license": "MIT",
     "scripts": {
-        "heroku-prebuild": "npm install -g http-server",
+        "heroku-prebuild": "npm prune install -g http-server",
         "heroku-postbuild": "ng build --prod",
         "start": "http-server dist/",
         "ng": "ng",
