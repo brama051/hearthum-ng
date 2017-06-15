@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class CallbackComponent implements OnInit {
 
     constructor(public auth: AuthService, public router: Router) {
+        console.log('Callback is called');
         if (auth.isAuthenticated()) {
             router.navigate(['']);
         } else {
