@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {SaveModalComponent} from './components/save-modal/save-modal.component';
 declare const navigator: any;
 declare const MediaRecorder: any;
+import wavesurfer from 'wavesurfer.js';
 
 @Component({
     selector: 'app-recorder',
@@ -19,7 +20,7 @@ export class RecorderComponent implements OnInit {
     // --
     @ViewChild(SaveModalComponent) saveModal: SaveModalComponent;
     // --
-    // private wavesurfer: WaveSurfer;
+    private wavesurfer: any;
     constructor() {
     }
 
@@ -42,6 +43,14 @@ export class RecorderComponent implements OnInit {
         navigator.msGetUserMedia);
 
         navigator.getUserMedia({audio: true}, onSuccess, e => console.log(e));
+
+        this.wavesurfer = wavesurfer.create({
+            container: '#waveform',
+            waveColor: 'red',
+            progressColor: 'purple'
+        });
+        this.wavesurfer.load('https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+
     }
 
     public cmdStartRecording() {
