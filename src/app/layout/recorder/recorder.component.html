@@ -10,29 +10,35 @@
 <nav class="navbar fixed-bottom navbar-light" style="z-index: 900;">
     <div class="container w-100">
         <div class="row" *ngIf="recordingFinished">
-            <div class="col">
+            <div class="col-4">
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <select #zoom name="zoom" id="" class="form-control" (change)="setZoom($event.target.value)" [(ngModel)]="visualizerZoom">
-                        <option value="25">.25</option>
-                        <option value="50">.50</option>
-                        <option value="75">.75</option>
-                        <option value="100" selected="selected">1</option>
-                        <option value="200">2.00</option>
-                        <option value="500">5.00</option>
-                        <option value="1000">10</option>
-                        <option value="2000">20</option>
+                        <option value="25">.25x</option>
+                        <option value="50">.50x</option>
+                        <option value="75">.75x</option>
+                        <option value="100">1x</option>
+                        <option value="200">2x</option>
+                        <option value="500">5x</option>
+                        <option value="1000">10x</option>
+                        <option value="2000">20x</option>
                     </select>
                 </div>
             </div>
-            <div class="col"></div>
-            <div class="col">
+            <div class="col-4">
+                <div class="form-group text-center">
+                    <p class="form-control-static">
+                        {{ wavesurfer.getDuration() | number : '1.2-2'}}s
+                    </p>
+                </div>
+            </div>
+            <div class="col-4">
                 <div class="form-group input-group">
                     <select #speed name="speed" class="form-control" (change)="setPlaybackRate($event.target.value)" [(ngModel)]="playbackSpeed">
-                        <option value="0.25">.25</option>
-                        <option value="0.50">.50</option>
-                        <option value="0.75">.75</option>
-                        <option value="1">1</option>
+                        <option value="0.25">.25x</option>
+                        <option value="0.50">.50x</option>
+                        <option value="0.75">.75x</option>
+                        <option value="1">1x</option>
                     </select>
                     <span class="input-group-addon"><i class="fa fa-tachometer"></i></span>
                 </div>
@@ -52,16 +58,16 @@
                             (click)="cmdStopRecording()"><i class="fa fa-circle"></i> Stop Recording
                     </button>
                     <!--Player-->
-                    <button type="button" class="btn btn-outline-primary w-25" *ngIf="recordingFinished"
+                    <button type="button" class="btn btn-secondary w-25" *ngIf="recordingFinished"
                             (click)="cmdSaveRecording()"><i class="fa fa-save"></i>
                     </button>
-                    <button type="button" class="btn btn-outline-primary w-50" *ngIf="recordingFinished && !playingActive"
+                    <button type="button" class="btn btn-secondary w-50" *ngIf="recordingFinished && !playingActive"
                             (click)="cmdPlayerPlay()"><i class="fa fa-play"></i> Play
                     </button>
-                    <button type="button" class="btn btn-outline-primary w-50 active" *ngIf="recordingFinished && playingActive"
+                    <button type="button" class="btn btn-secondary w-50 active" *ngIf="recordingFinished && playingActive"
                             (click)="cmdPlayerPause()"><i class="fa fa-pause"></i> Pause
                     </button>
-                    <button type="button" class="btn btn-outline-primary w-25" *ngIf="recordingFinished"
+                    <button type="button" class="btn btn-secondary w-25" *ngIf="recordingFinished"
                             (click)="cmdDiscardRecording()"><i class="fa fa-trash-o"></i>
                     </button>
                 </div>

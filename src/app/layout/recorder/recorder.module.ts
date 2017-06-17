@@ -5,7 +5,7 @@ import {RecorderRoutingModule} from './recorder-routing.module';
 import {RecorderComponent} from './recorder.component';
 import {SaveModalComponent} from './components/save-modal/save-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({

@@ -12,31 +12,34 @@ import wavesurfer from 'wavesurfer.js';
 })
 export class RecorderComponent implements OnInit {
 
-    // -- player state
+    // -- player state --------------------------------------------------------
     public recordingStarted = false;
     public recordingFinished = false;
     public playingActive = false;
-    // -- recorder objects
+    // -- recorder objects ----------------------------------------------------
     private chunks: any = [];
     private mediaRecorder: any;
-    // -- save recording dialog
+    private recordingLength = 0;
+    // -- save recording dialog -----------------------------------------------
     @ViewChild(SaveModalComponent) saveModal: SaveModalComponent;
-    @ViewChild('zoom') eleZoomSelect: ElementRef;
-    @ViewChild('speed') eleSpeedSelect: ElementRef;
-    // -- visualizer
+    // -- visualizer ----------------------------------------------------------
     private wavesurfer: any;
-    // -- constructor
+    // -- wavesurfer dynamic parameters
     private playbackSpeed = 1;
     private visualizerZoom = 100;
+    // -- recording as a file
+    private recordingFile: Blob;
+    // -- constructor ---------------------------------------------------------
     constructor(private ref: ChangeDetectorRef) {
     }
-
+    // -- methods -------------------------------------------------------------
     ngOnInit() {
         const onSuccess = stream => {
             this.mediaRecorder = new MediaRecorder(stream);
             this.mediaRecorder.onstop = e => {
                 const blob = new Blob(this.chunks, {'type': 'audio/wav;'});
                 this.wavesurfer.loadBlob(blob);
+                this.recordingFile = blob;
                 this.chunks = [];
             };
 
@@ -51,8 +54,17 @@ export class RecorderComponent implements OnInit {
         navigator.getUserMedia({audio: true}, onSuccess, e => console.log(e));
     }
 
+    // save blob as file
+    private saveBlob(fileName) {
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.href = window.URL.createObjectURL(this.recordingFile);
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(a.href);
+    }
 
-
+    // play button click method
     public cmdStartRecording() {
         this.recordingStarted = true;
         this.wavesurfer = wavesurfer.create({
@@ -65,44 +77,51 @@ export class RecorderComponent implements OnInit {
             minPxPerSec: 100,
         });
         this.wavesurfer.on('finish', this.onPlaybackFinish.bind(this));
+        this.wavesurfer.on('ready', this.onWavesurferReady.bind(this));
         this.mediaRecorder.start();
     }
 
+    // wavesurfer playback finished event
     private onPlaybackFinish() {
         this.playingActive = false;
         this.wavesurfer.stop();
         this.ref.markForCheck();
         this.ref.detectChanges();
-
     }
 
+    // wavesurfer ready event
+    private onWavesurferReady() {
+        this.recordingLength = this.wavesurfer.getDuration();
+        this.ref.markForCheck();
+        this.ref.detectChanges();
+    }
+
+    // finish recording click method
     public cmdStopRecording() {
-        this.recordingFinished = true;
         this.mediaRecorder.stop();
+        this.recordingFinished = true;
     }
 
+    // wavesurfer play call method
     public cmdPlayerPlay() {
         this.playingActive = true;
-        // this.audio.play();
         this.wavesurfer.play();
     }
 
+    // wavesurfer pause method
     public cmdPlayerPause() {
         this.playingActive = false;
-        // this.audio.pause();
         this.wavesurfer.pause();
     }
 
+    // save recording dialog method
     public cmdSaveRecording() {
         // todo: call popup with form
-        this.playingActive = false;
-        this.recordingFinished = false;
-        this.recordingStarted = false;
-        this.saveModal.open();
-    }
+        // console.log(this.wavesurfer.exportPCM());
+        // radi: console.log(this.wavesurfer.backend.mergedPeaks);
+        this.saveBlob('file.wav');
 
-    public cmdDiscardRecording() {
-        // todo: remove recording from memory
+        this.saveModal.open();
         this.playingActive = false;
         this.recordingFinished = false;
         this.recordingStarted = false;
@@ -112,11 +131,24 @@ export class RecorderComponent implements OnInit {
 
     }
 
+    // discard recording dialog method
+    public cmdDiscardRecording() {
+        // todo: remove recording from memory
+        this.playingActive = false;
+        this.recordingFinished = false;
+        this.recordingStarted = false;
+        this.wavesurfer.destroy();
+        this.playbackSpeed = 1;
+        this.visualizerZoom = 100;
+    }
+
+    // wavesurfer zoom method
     public setZoom(factor) {
         this.visualizerZoom = factor;
         this.wavesurfer.zoom(factor);
     }
 
+    // wavesurfer playback rate method
     public setPlaybackRate(factor) {
         this.playbackSpeed = factor;
         this.wavesurfer.setPlaybackRate(factor);
