@@ -1,8 +1,10 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {SaveModalComponent} from './components/save-modal/save-modal.component';
 declare const navigator: any;
 declare const MediaRecorder: any;
 import wavesurfer from 'wavesurfer.js';
+import {RepositoryService} from '../../shared/services/repository.service';
+import {Recording} from '../../shared/models/recording';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class RecorderComponent implements OnInit {
     // -- recording as a file
     private recordingFile: Blob;
     // -- constructor ---------------------------------------------------------
-    constructor(private ref: ChangeDetectorRef) {
+    constructor(private ref: ChangeDetectorRef, private repositoryService: RepositoryService) {
     }
     // -- methods -------------------------------------------------------------
     ngOnInit() {
@@ -55,13 +57,22 @@ export class RecorderComponent implements OnInit {
     }
 
     // save blob as file
-    private saveBlob(fileName) {
-        const a = document.createElement('a');
+    private saveBlob() {
+        /*const a = document.createElement('a');
         document.body.appendChild(a);
         a.href = window.URL.createObjectURL(this.recordingFile);
         a.download = fileName;
         a.click();
-        window.URL.revokeObjectURL(a.href);
+        window.URL.revokeObjectURL(a.href);*/
+
+        const reader = new FileReader();
+        reader.readAsDataURL(this.recordingFile);
+        reader.onloadend = () => {
+            /*const base64data = reader.result;
+             console.log(base64data );*/
+            console.log(this.recordingFile);
+            this.repositoryService.postRecording(new Recording(this.recordingFile)).subscribe(r => console.log(r));
+        };
     }
 
     // play button click method
@@ -119,7 +130,7 @@ export class RecorderComponent implements OnInit {
         // todo: call popup with form
         // console.log(this.wavesurfer.exportPCM());
         // radi: console.log(this.wavesurfer.backend.mergedPeaks);
-        this.saveBlob('file.wav');
+        // radi: this.saveBlob('file.wav');
 
         this.saveModal.open();
         this.playingActive = false;
@@ -128,6 +139,9 @@ export class RecorderComponent implements OnInit {
         this.wavesurfer.destroy();
         this.playbackSpeed = 1;
         this.visualizerZoom = 100;
+        this.saveBlob();
+        // this.repositoryService.getUser().subscribe((user: User) => console.log(user));
+        // this.repositoryService.postRecording(new Recording(1, this.recordingFile)).subscribe(r => console.log(r));
 
     }
 
