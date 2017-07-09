@@ -40,25 +40,33 @@ export class RepositoryService {
             .map((response: Response) => response.json() as PagedResponse<RecordingDto>);
     }
 
-    public postRecording(recording: Recording): Observable<any> {
+    public postRecording(recording: Recording) {
         const headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json; multipart/form-data;');
         const options = new RequestOptions({
             headers: headers
         });
 
-        const formData = new FormData();
-        formData.append('content', recording.content, 'recording.wav');
-        formData.append('patientName', recording.patientName);
-        formData.append('patientEmail', recording.patientEmail);
-        formData.append('recordingDevice', recording.recordingDevice);
-        formData.append('recordingPosition', recording.recordingPosition);
-        formData.append('recordingDateTime', recording.recordingDateTime);
-        formData.append('recordingLength', recording.recordingLength);
+        this.blobToBase64(recording.content, (base64content) => {
+            console.log(base64content);
+            const formData = new FormData();
+            formData.append('content', base64content, 'recording.wav');
+            formData.append('patientName', recording.patientName);
+            formData.append('patientEmail', recording.patientEmail);
+            formData.append('recordingDevice', recording.recordingDevice);
+            formData.append('recordingPosition', recording.recordingPosition);
+            formData.append('recordingDateTime', recording.recordingDateTime);
+            formData.append('recordingLength', recording.recordingLength);
 
-        return this.http
-            .post(`${this.repositoryURL}/recordings`,  formData)
-            .map((response: Response) => response.json());
+            console.log('--- about to post ---');
+
+            this.http
+                .post(`${this.repositoryURL}/recordings`,  formData)
+                .map((response: Response) => response.json()).subscribe((d) => {
+                console.log('--- post success ---');
+                console.log(d);
+            });
+        });
     }
 
     // --- helper methods -----------------------------------------------------
@@ -73,5 +81,15 @@ export class RepositoryService {
             headers: headers
         });
     }
+
+    private blobToBase64(blob, cb) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const dataUrl = reader.result;
+            const base64 = dataUrl.split(',')[1];
+            cb(base64);
+        };
+        reader.readAsDataURL(blob);
+    };
 
 }

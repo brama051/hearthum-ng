@@ -79,7 +79,7 @@ export class RecorderComponent implements OnInit {
             recording.recordingDevice = this.saveModal.recordingDevice;
             recording.recordingLength = this.recordingLength;
 
-            this.repositoryService.postRecording(recording).subscribe(r => console.log(r));
+            this.repositoryService.postRecording(recording)/*.subscribe(r => console.log(r))*/;
         };
     }
 
