@@ -13,28 +13,26 @@ import {Recording} from '../../shared/models/recording';
 export class RecordingHistoryComponent implements OnInit, OnChanges {
 
     public recordingPage: PagedResponse<RecordingDto>;
-    public content: RecordingDto[];
+    private pageSize = 2;
+    private page = 1;
 
     constructor(private changeDetector: ChangeDetectorRef, private repositoryService: RepositoryService) {
 
     }
 
     ngOnInit() {
-        this.repositoryService.getRecordingPage(0, 25).subscribe((d) => { this.recordingPage = d; console.log(d); });
+        this.loadPage();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
     }
 
-    private handlePostData(pagedResponse: PagedResponse<RecordingDto>) {
-        // console.log(pagedResponse);
-        this.recordingPage = pagedResponse;
-        // ApplicationRef.tick()
-
-        // this.content = pagedResponse.content;
-        /*console.log(this.content);
-        console.log(this.recordingPage);*/
-        this.changeDetector.detectChanges();
+    private loadPage() {
+        this.repositoryService.getRecordingPage(this.page - 1, this.pageSize).subscribe((d) => {
+            this.recordingPage = d; console.log(d);
+            this.pageSize = this.recordingPage.size;
+            this.page = this.recordingPage.number + 1;
+        });
     }
 
     private handlePostError(e) {
@@ -44,6 +42,10 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
 
     private handlePostComplete() {
         console.log('--- complete ---');
+    }
+
+    private handlePageChange() {
+        this.loadPage();
     }
 
 }

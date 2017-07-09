@@ -16,6 +16,7 @@ const routes: Routes = [
             {path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule'},
             {path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule'},
             {path: 'recorder', loadChildren: './recorder/recorder.module#RecorderModule'},
+            {path: 'player', loadChildren: './player/player.module#PlayerModule'},
             {
                 path: 'recording-history',
                 loadChildren: './recording-history/recording-history.module#RecordingHistoryModule'

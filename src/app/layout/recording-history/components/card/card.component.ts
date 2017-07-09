@@ -13,7 +13,7 @@ export class CardComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(this.recording);
+        // console.log(this.recording);
     }
 
     ngOnInit() {
