@@ -1,15 +1,9 @@
-<div class="row" *ngIf="!recordingStarted">
-    <div class="col-lg-12">
-        <p class="text-center">Press the button below to start recording.</p>
-    </div>
-</div>
 <div id="waveform"></div>
-
 <br/>
 <br/>
 <nav class="navbar fixed-bottom navbar-light" style="z-index: 900;">
     <div class="container w-100">
-        <div class="row" *ngIf="recordingFinished">
+        <div class="row">
             <div class="col-4">
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -50,24 +44,17 @@
         <div class="row">
             <div class="col">
                 <div class="btn-group w-100" role="group">
-                    <!--Recorder-->
-                    <button type="button" class="btn btn-outline-danger w-100" *ngIf="!recordingStarted && !recordingFinished"
-                            (click)="cmdStartRecording()"><i class="fa fa-circle-o"></i> Start Recording
-                    </button>
-                    <button type="button" class="btn btn-outline-danger w-100 active" *ngIf="recordingStarted && !recordingFinished"
-                            (click)="cmdStopRecording()"><i class="fa fa-circle"></i> Stop Recording
-                    </button>
                     <!--Player-->
-                    <button type="button" class="btn btn-secondary w-25" *ngIf="recordingFinished"
-                            (click)="cmdOpenSaveDialog()"><i class="fa fa-save"></i>
+                    <button type="button" class="btn btn-secondary w-25"
+                            (click)="cmdOpenSaveDialog()"><i class="fa fa-pencil"></i>
                     </button>
-                    <button type="button" class="btn btn-secondary w-50" *ngIf="recordingFinished && !playingActive"
+                    <button type="button" class="btn btn-secondary w-50" *ngIf="!playingActive"
                             (click)="cmdPlayerPlay()"><i class="fa fa-play"></i> Play
                     </button>
-                    <button type="button" class="btn btn-secondary w-50 active" *ngIf="recordingFinished && playingActive"
+                    <button type="button" class="btn btn-secondary w-50 active" *ngIf="playingActive"
                             (click)="cmdPlayerPause()"><i class="fa fa-pause"></i> Pause
                     </button>
-                    <button type="button" class="btn btn-secondary w-25" *ngIf="recordingFinished"
+                    <button type="button" class="btn btn-secondary w-25"
                             (click)="cmdDiscardRecording()"><i class="fa fa-trash-o"></i>
                     </button>
                 </div>

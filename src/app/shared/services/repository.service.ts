@@ -28,10 +28,10 @@ export class RepositoryService {
     }
 
     // --- recording methods --------------------------------------------------
-    public getRecording(id: string): Observable<any> {
+    public getRecording(id: string): Observable<RecordingDto> {
         return this.http
             .get(`${this.repositoryURL}/recordings/${id}`)
-            .map((response: Response) => response.json());
+            .map((response: Response) => response.json() as RecordingDto);
     }
 
     public getRecordingPage(page: number, size: number): Observable<PagedResponse<RecordingDto>> {

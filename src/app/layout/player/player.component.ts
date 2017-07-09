@@ -4,6 +4,7 @@ declare const MediaRecorder: any;
 import wavesurfer from 'wavesurfer.js';
 import {RepositoryService} from '../../shared/services/repository.service';
 import {Recording} from '../../shared/models/recording';
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -12,10 +13,9 @@ import {Recording} from '../../shared/models/recording';
     styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-
+    private recordingId: string;
+    private recording: Recording;
     // -- player state --------------------------------------------------------
-    public recordingStarted = false;
-    public recordingFinished = false;
     public playingActive = false;
     // -- recorder objects ----------------------------------------------------
     private chunks: any = [];
@@ -30,11 +30,40 @@ export class PlayerComponent implements OnInit {
     // -- recording as a file
     private recordingFile: Blob;
     // -- constructor ---------------------------------------------------------
-    constructor(private ref: ChangeDetectorRef, private repositoryService: RepositoryService) {
+    constructor(private ref: ChangeDetectorRef,
+                private repositoryService: RepositoryService,
+                private route: ActivatedRoute,
+                private router: Router) {
     }
     // -- methods -------------------------------------------------------------
     ngOnInit() {
+        this.wavesurfer = wavesurfer.create({
+            container: '#waveform',
+            waveColor: 'blue',
+            progressColor: 'gray',
+            height: window.screen.height - 135,
+            normalize: true,
+            scrollParent: true,
+            minPxPerSec: 100,
+        });
+
+        const getRouteParams = this.route
+            .queryParams
+            .subscribe(params => {
+                this.recordingId = params['id'] || 0;
+                // console.log(this.recordingId);
+                this.repositoryService.getRecording(this.recordingId).subscribe((d) => {
+                    console.log('--- getting recording by id ---');
+                    this.recording = d;
+                    console.log(this.recording);
+                    this.wavesurfer.loadBlob(this.recording.content);
+
+                });
+            });
+
+
         const onSuccess = stream => {
+
             this.mediaRecorder = new MediaRecorder(stream);
             this.mediaRecorder.onstop = e => {
                 const blob = new Blob(this.chunks, {'type': 'audio/wav;'});
@@ -69,23 +98,6 @@ export class PlayerComponent implements OnInit {
         };
     }
 
-    // play button click method
-    public cmdStartRecording() {
-        this.recordingStarted = true;
-        this.wavesurfer = wavesurfer.create({
-            container: '#waveform',
-            waveColor: 'blue',
-            progressColor: 'gray',
-            height: window.screen.height - 135,
-            normalize: true,
-            scrollParent: true,
-            minPxPerSec: 100,
-        });
-        this.wavesurfer.on('finish', this.onPlaybackFinish.bind(this));
-        this.wavesurfer.on('ready', this.onWavesurferReady.bind(this));
-        this.mediaRecorder.start();
-    }
-
     // wavesurfer playback finished event
     private onPlaybackFinish() {
         this.playingActive = false;
@@ -101,12 +113,6 @@ export class PlayerComponent implements OnInit {
         this.ref.detectChanges();
     }
 
-    // finish recording click method
-    public cmdStopRecording() {
-        this.mediaRecorder.stop();
-        this.recordingFinished = true;
-    }
-
     // wavesurfer play call method
     public cmdPlayerPlay() {
         this.playingActive = true;
@@ -119,37 +125,9 @@ export class PlayerComponent implements OnInit {
         this.wavesurfer.pause();
     }
 
-    // save recording dialog method
-    public cmdSaveRecording() {
-        // todo: call popup with form
-        // console.log(this.wavesurfer.exportPCM());
-        // radi: console.log(this.wavesurfer.backend.mergedPeaks);
-        // radi: this.saveBlob('file.wav');
-        this.playingActive = false;
-        this.recordingFinished = false;
-        this.recordingStarted = false;
-        this.wavesurfer.destroy();
-        this.playbackSpeed = 1;
-        this.visualizerZoom = 100;
-        this.saveBlob();
-        // this.repositoryService.getUser().subscribe((user: User) => console.log(user));
-        // this.repositoryService.postRecording(new Recording(1, this.recordingFile)).subscribe(r => console.log(r));
-
-    }
 
     public cmdOpenSaveDialog() {
         // this.saveModal.open();
-    }
-
-    // discard recording dialog method
-    public cmdDiscardRecording() {
-        // todo: remove recording from memory
-        this.playingActive = false;
-        this.recordingFinished = false;
-        this.recordingStarted = false;
-        this.wavesurfer.destroy();
-        this.playbackSpeed = 1;
-        this.visualizerZoom = 100;
     }
 
     // wavesurfer zoom method
