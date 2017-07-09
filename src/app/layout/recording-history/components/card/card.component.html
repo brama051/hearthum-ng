@@ -1,0 +1,10 @@
+<div class="card bottom-spacing">
+    <div class="card-block">
+        <h4 class="card-title">{{recording?.patientName || "John Doe"}}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">Date: <span class="pull-right">{{recording?.recordingDateTime}}</span></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Length: <span class="pull-right">{{recording?.recordingLength | number : '1.2-2'}}s</span></h6>
+        <p class="card-text">Email: {{recording?.patientEmail}}</p>
+        <a href="#" class="card-link">Recording Dagnostics</a>
+        <a href="#" class="card-link">Preview Recording</a>
+    </div>
+</div>
