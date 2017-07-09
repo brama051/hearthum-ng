@@ -71,7 +71,15 @@ export class RecorderComponent implements OnInit {
             /*const base64data = reader.result;
              console.log(base64data );*/
             console.log(this.recordingFile);
-            this.repositoryService.postRecording(new Recording(this.recordingFile)).subscribe(r => console.log(r));
+            const recording = new Recording(this.recordingFile);
+            recording.patientName = this.saveModal.patientName;
+            recording.patientEmail = this.saveModal.patientEmail;
+            recording.recordingPosition = this.saveModal.recordingPosition;
+            recording.recordingDateTime = this.saveModal.recordingDateTime;
+            recording.recordingDevice = this.saveModal.recordingDevice;
+            recording.recordingLength = this.recordingLength;
+
+            this.repositoryService.postRecording(recording).subscribe(r => console.log(r));
         };
     }
 
@@ -131,8 +139,6 @@ export class RecorderComponent implements OnInit {
         // console.log(this.wavesurfer.exportPCM());
         // radi: console.log(this.wavesurfer.backend.mergedPeaks);
         // radi: this.saveBlob('file.wav');
-
-        this.saveModal.open();
         this.playingActive = false;
         this.recordingFinished = false;
         this.recordingStarted = false;
@@ -143,6 +149,10 @@ export class RecorderComponent implements OnInit {
         // this.repositoryService.getUser().subscribe((user: User) => console.log(user));
         // this.repositoryService.postRecording(new Recording(1, this.recordingFile)).subscribe(r => console.log(r));
 
+    }
+
+    public cmdOpenSaveDialog() {
+        this.saveModal.open();
     }
 
     // discard recording dialog method

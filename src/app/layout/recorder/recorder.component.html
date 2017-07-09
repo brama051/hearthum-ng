@@ -59,7 +59,7 @@
                     </button>
                     <!--Player-->
                     <button type="button" class="btn btn-secondary w-25" *ngIf="recordingFinished"
-                            (click)="cmdSaveRecording()"><i class="fa fa-save"></i>
+                            (click)="cmdOpenSaveDialog()"><i class="fa fa-save"></i>
                     </button>
                     <button type="button" class="btn btn-secondary w-50" *ngIf="recordingFinished && !playingActive"
                             (click)="cmdPlayerPlay()"><i class="fa fa-play"></i> Play
@@ -77,5 +77,5 @@
 
 
 </nav>
-<app-save-modal></app-save-modal>
+<app-save-modal (update)="cmdSaveRecording()"></app-save-modal>
 

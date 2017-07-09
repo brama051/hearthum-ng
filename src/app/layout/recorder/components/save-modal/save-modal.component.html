@@ -9,25 +9,38 @@
         <form role="form">
             <fieldset class="form-group">
                 <label>Patient Name</label>
-                <input class="form-control"/>
-                <p class="help-block">Example block-level help text here.</p>
+                <input [(ngModel)]="patientName" name="patientName" class="form-control" />
+                <!--<p class="help-block">Example block-level help text here.</p>-->
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Patient E-mail</label>
+                <input [(ngModel)]="patientEmail" name="patientEmail" class="form-control" />
+                <!--<p class="help-block">Example block-level help text here.</p>-->
             </fieldset>
             <fieldset class="form-group">
                 <label>Recording position</label>
-                <select name="" id="" class="form-control">
+                <select [(ngModel)]="recordingPosition" name="recordingPosition" class="form-control">
                     <option value="">...</option>
                 </select>
-                <p class="help-block">Example block-level help text here.</p>
+                <!--<p class="help-block">Example block-level help text here.</p>-->
+            </fieldset>
+            <fieldset class="form-group">
+                <label>Recording device</label>
+                <select [(ngModel)]="recordingDevice" name="recordingDevice" class="form-control">
+                    <option value="">...</option>
+                </select>
+                <!--<p class="help-block">Example block-level help text here.</p>-->
             </fieldset>
             <fieldset class="form-group">
                 <label>Date of recording</label>
-                <input type="datetime-local" class="form-control"/>
-                <p class="help-block">Example block-level help text here.</p>
+                <input [(ngModel)]="recordingDateTime" name="recordingDateTime" type="datetime-local" class="form-control"/>
+                <!--<p class="help-block">Example block-level help text here.</p>-->
             </fieldset>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="c('Save click'); close('save');">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="c('Close click'); close('close');">Close</button>
     </div>
 </ng-template>
 
