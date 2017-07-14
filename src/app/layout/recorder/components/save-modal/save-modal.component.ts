@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {Recording} from "../../../../shared/models/recording";
 
 
 @Component({
@@ -12,30 +13,14 @@ export class SaveModalComponent {
     closeResult: string;
     @ViewChild('childModal') public childModal: NgbModal;
     @Output() update = new EventEmitter<any>();
-
-    // ------------------------------------------------------------------------
-    private datetime: Date;
     // --- form attributes ----------------------------------------------------
-    public patientName = '';
-    public patientEmail = '';
-    public recordingPosition = '';
-    public recordingDateTime = '';
-    public recordingDevice = '';
+    public recording: Recording = new Recording(new Blob());
 
     constructor(private modalService: NgbModal) {
     }
 
     public open() {
-        this.patientName = '';
-        this.patientEmail = '';
-        this.recordingPosition = '';
-        this.recordingDateTime = '';
-        this.recordingDevice = '';
-        this.datetime = new Date();
-        this.recordingDateTime = this.datetime.getFullYear() + '-' +
-            ('0' + (this.datetime.getMonth() + 1)).slice(-2)
-            + '-' + ('0' + this.datetime.getDate()).slice(-2)
-            + 'T' + this.datetime.getHours() + ':' + this.datetime.getMinutes();
+        this.recording.setDefaultValues();
 
         this.modalService.open(this.childModal).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;

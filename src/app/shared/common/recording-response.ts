@@ -1,4 +1,4 @@
-export interface RecordingDto {
+export class RecordingResponse {
     id: number;
     patientName: string;
     patientEmail: string;
@@ -6,10 +6,11 @@ export interface RecordingDto {
     patientHeight: number;
     patientWeight: number;
     patientAge: number;
+    recordingContent: string;
     recordingLength: number;
     recordingPosition: string;
     recordingDateTime: string;
     recordingDevice: string;
     comment: string;
-    content: Blob;
+
 }

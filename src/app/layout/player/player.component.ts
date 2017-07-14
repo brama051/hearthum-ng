@@ -4,7 +4,7 @@ declare const MediaRecorder: any;
 import wavesurfer from 'wavesurfer.js';
 import {RepositoryService} from '../../shared/services/repository.service';
 import {Recording} from '../../shared/models/recording';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -47,16 +47,23 @@ export class PlayerComponent implements OnInit {
             minPxPerSec: 100,
         });
 
+        this.wavesurfer.on('finish', this.onPlaybackFinish.bind(this));
+        this.wavesurfer.on('ready', this.onWavesurferReady.bind(this));
+
         const getRouteParams = this.route
             .queryParams
             .subscribe(params => {
                 this.recordingId = params['id'] || 0;
-                // console.log(this.recordingId);
                 this.repositoryService.getRecording(this.recordingId).subscribe((d) => {
-                    console.log('--- getting recording by id ---');
-                    this.recording = d;
-                    console.log(this.recording);
-                    this.wavesurfer.loadBlob(this.recording.content);
+                    const byteCharacters = atob(d.recordingContent);
+                    const byteNumbers = new Array(byteCharacters.length);
+                    for (let i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    }
+                    const byteArray = new Uint8Array(byteNumbers);
+                    const blob = new Blob([byteArray], { 'type': 'audio/wav;' });
+
+                    this.wavesurfer.loadBlob(blob);
 
                 });
             });
@@ -74,6 +81,8 @@ export class PlayerComponent implements OnInit {
 
             this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
         };
+
+
 
         navigator.getUserMedia = (navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||

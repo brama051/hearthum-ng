@@ -6,6 +6,7 @@ import {User} from '../models/user';
 import {Recording} from '../models/recording';
 import {PagedResponse} from '../common/paged-response';
 import {RecordingDto} from '../common/dto/recording-dto';
+import {RecordingResponse} from "../common/recording-response";
 
 @Injectable()
 export class RepositoryService {
@@ -28,10 +29,10 @@ export class RepositoryService {
     }
 
     // --- recording methods --------------------------------------------------
-    public getRecording(id: string): Observable<RecordingDto> {
+    public getRecording(id: string): Observable<RecordingResponse> {
         return this.http
             .get(`${this.repositoryURL}/recordings/${id}`)
-            .map((response: Response) => response.json() as RecordingDto);
+            .map((response: Response) => response.json() as RecordingResponse);
     }
 
     public getRecordingPage(page: number, size: number): Observable<PagedResponse<RecordingDto>> {
@@ -40,33 +41,30 @@ export class RepositoryService {
             .map((response: Response) => response.json() as PagedResponse<RecordingDto>);
     }
 
-    public postRecording(recording: Recording) {
+    public postRecording(recording: Recording): Observable<any> {
         const headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json; multipart/form-data;');
         const options = new RequestOptions({
             headers: headers
         });
+        console.log(recording);
+        const formData = new FormData();
+        formData.append('content', new File([recording.content], 'recording.wav' ));
+        formData.append('patientName', recording.patientName);
+        formData.append('patientEmail', recording.patientEmail);
+        formData.append('patientAge', recording.patientAge);
+        formData.append('patientSex', recording.patientSex);
+        formData.append('patientHeight', recording.patientHeight);
+        formData.append('patientWeight', recording.patientWeight);
+        formData.append('recordingDevice', recording.recordingDevice);
+        formData.append('recordingPosition', recording.recordingPosition);
+        formData.append('recordingDateTime', recording.recordingDateTime);
+        formData.append('recordingLength', recording.recordingLength);
+        formData.append('comment', recording.comment);
 
-        this.blobToBase64(recording.content, (base64content) => {
-            console.log(base64content);
-            const formData = new FormData();
-            formData.append('content', base64content, 'recording.wav');
-            formData.append('patientName', recording.patientName);
-            formData.append('patientEmail', recording.patientEmail);
-            formData.append('recordingDevice', recording.recordingDevice);
-            formData.append('recordingPosition', recording.recordingPosition);
-            formData.append('recordingDateTime', recording.recordingDateTime);
-            formData.append('recordingLength', recording.recordingLength);
-
-            console.log('--- about to post ---');
-
-            this.http
-                .post(`${this.repositoryURL}/recordings`,  formData)
-                .map((response: Response) => response.json()).subscribe((d) => {
-                console.log('--- post success ---');
-                console.log(d);
-            });
-        });
+        return this.http
+            .post(`${this.repositoryURL}/recordings`,  formData)
+            .map((response: Response) => response.json());
     }
 
     // --- helper methods -----------------------------------------------------

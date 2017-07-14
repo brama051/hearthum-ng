@@ -1,15 +1,20 @@
 <div class="card bottom-spacing">
     <div class="card-block">
-        <h4 class="card-title">{{recording?.patientName || "John Doe"}}</h4>
+        <h4 class="card-title"><i class="fa fa-user-circle"></i> {{recording?.patientName || "John Doe"}}</h4>
         <h6 class="card-subtitle mb-2">
-            <span class="text-muted">Email:</span> <a *ngIf="recording && recording.patientEmail;else unknown" href="mailto:{{ recording?.patientEmail }}" class="pull-right">{{ recording?.patientEmail }}</a>
+            <span class="text-muted"><i class="fa fa-envelope-o"></i> Email:</span>
+            <a *ngIf="recording && recording.patientEmail;else unknown" href="mailto:{{ recording?.patientEmail }}" class="pull-right">{{ recording?.patientEmail }}</a>
             <ng-template #unknown>
                 <span class="pull-right">unknown</span>
             </ng-template>
         </h6>
-        <h6 class="card-subtitle mb-2"><span class="text-muted">Date:</span> <span class="pull-right">{{recording?.recordingDateTime}}</span></h6>
-        <h6 class="card-subtitle mb-2"><span class="text-muted">Length:</span> <span class="pull-right">{{recording?.recordingLength | number : '1.2-2'}}s</span></h6>
-        <a [routerLink]="['/analyzed-recordings']" [queryParams]="{ id: recording?.id }" class="card-link">Recording Diagnostics</a>
-        <a [routerLink]="['/player']" [queryParams]="{ id: recording?.id }" class="card-link">Preview Recording</a>
+        <h6 class="card-subtitle mb-2"><span class="text-muted"><i class="fa fa-calendar-o"></i> Date:</span> <span class="pull-right">{{recording?.recordingDateTime}}</span></h6>
+        <h6 class="card-subtitle mb-2"><span class="text-muted"><i class="fa fa-clock-o"></i> Length:</span> <span class="pull-right">{{recording?.recordingLength | number : '1.2-2'}}s</span></h6>
+        <br>
+        <div class="btn-group w-100" role="group">
+            <button [routerLink]="['/analyzed-recordings']" [queryParams]="{ id: recording?.id }" class="btn btn-outline-primary w-50">Diagnostics</button>
+            <button [routerLink]="['/player']" [queryParams]="{ id: recording?.id }" class="btn btn-outline-primary w-50">Recording</button>
+        </div>
+
     </div>
 </div>

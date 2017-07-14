@@ -31,6 +31,7 @@ export class RecorderComponent implements OnInit {
     private visualizerZoom = 100;
     // -- recording as a file
     private recordingFile: Blob;
+
     // -- constructor ---------------------------------------------------------
     constructor(private ref: ChangeDetectorRef, private repositoryService: RepositoryService) {
     }
@@ -40,9 +41,10 @@ export class RecorderComponent implements OnInit {
             this.mediaRecorder = new MediaRecorder(stream);
             this.mediaRecorder.onstop = e => {
                 const blob = new Blob(this.chunks, {'type': 'audio/wav;'});
+                console.log(this.chunks);
                 this.wavesurfer.loadBlob(blob);
                 this.recordingFile = blob;
-                this.chunks = [];
+                // this.chunks = [];
             };
 
             this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
@@ -61,7 +63,7 @@ export class RecorderComponent implements OnInit {
         /*const a = document.createElement('a');
         document.body.appendChild(a);
         a.href = window.URL.createObjectURL(this.recordingFile);
-        a.download = fileName;
+        a.download = 'file.wav';
         a.click();
         window.URL.revokeObjectURL(a.href);*/
 
@@ -70,16 +72,20 @@ export class RecorderComponent implements OnInit {
         reader.onloadend = () => {
             /*const base64data = reader.result;
              console.log(base64data );*/
-            console.log(this.recordingFile);
-            const recording = new Recording(this.recordingFile);
-            recording.patientName = this.saveModal.patientName;
+            // console.log(this.recordingFile);
+            const recording = this.saveModal.recording; // new Recording(this.recordingFile);
+            recording.content = this.recordingFile;
+            recording.recordingLength = this.recordingLength;
+            console.log('--- save blob ---');
+            // console.log(window.URL.createObjectURL(this.recordingFile));
+            /*recording.patientName = this.saveModal.patientName;
             recording.patientEmail = this.saveModal.patientEmail;
             recording.recordingPosition = this.saveModal.recordingPosition;
             recording.recordingDateTime = this.saveModal.recordingDateTime;
             recording.recordingDevice = this.saveModal.recordingDevice;
-            recording.recordingLength = this.recordingLength;
+            recording.recordingLength = this.recordingLength;*/
 
-            this.repositoryService.postRecording(recording)/*.subscribe(r => console.log(r))*/;
+            this.repositoryService.postRecording(recording).subscribe(r => console.log(r));
         };
     }
 
