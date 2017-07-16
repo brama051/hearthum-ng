@@ -13,8 +13,8 @@ import {Recording} from '../../shared/models/recording';
 export class RecordingHistoryComponent implements OnInit, OnChanges {
 
     public recordingPage: PagedResponse<RecordingDto>;
-    private pageSize = 10;
-    private page = 1;
+    public pageSize = 10;
+    public page = 1;
 
     constructor(private changeDetector: ChangeDetectorRef, private repositoryService: RepositoryService) {
 

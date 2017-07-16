@@ -23,10 +23,10 @@ export class PlayerComponent implements OnInit {
     private recordingLength = 0;
     // -- save recording dialog -----------------------------------------------
     // -- visualizer ----------------------------------------------------------
-    private wavesurfer: any;
+    public wavesurfer: any;
     // -- wavesurfer dynamic parameters
-    private playbackSpeed = 1;
-    private visualizerZoom = 100;
+    public playbackSpeed = 1;
+    public visualizerZoom = 100;
     // -- recording as a file
     private recordingFile: Blob;
     // -- constructor ---------------------------------------------------------
@@ -134,6 +134,8 @@ export class PlayerComponent implements OnInit {
         this.wavesurfer.pause();
     }
 
+    public cmdDiscardRecording() {
+    }
 
     public cmdOpenSaveDialog() {
         // this.saveModal.open();
