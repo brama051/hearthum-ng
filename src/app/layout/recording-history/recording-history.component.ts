@@ -44,7 +44,7 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
         console.log('--- complete ---');
     }
 
-    private handlePageChange() {
+    public handlePageChange() {
         this.loadPage();
     }
 
