@@ -60,31 +60,13 @@ export class RecorderComponent implements OnInit {
 
     // save blob as file
     private saveBlob() {
-        /*const a = document.createElement('a');
-        document.body.appendChild(a);
-        a.href = window.URL.createObjectURL(this.recordingFile);
-        a.download = 'file.wav';
-        a.click();
-        window.URL.revokeObjectURL(a.href);*/
-
         const reader = new FileReader();
         reader.readAsDataURL(this.recordingFile);
-        reader.onloadend = () => {
-            /*const base64data = reader.result;
-             console.log(base64data );*/
-            // console.log(this.recordingFile);
+        reader.onloadend = () => {;
             const recording = this.saveModal.recording; // new Recording(this.recordingFile);
             recording.content = this.recordingFile;
             recording.recordingLength = this.recordingLength;
             console.log('--- save blob ---');
-            // console.log(window.URL.createObjectURL(this.recordingFile));
-            /*recording.patientName = this.saveModal.patientName;
-            recording.patientEmail = this.saveModal.patientEmail;
-            recording.recordingPosition = this.saveModal.recordingPosition;
-            recording.recordingDateTime = this.saveModal.recordingDateTime;
-            recording.recordingDevice = this.saveModal.recordingDevice;
-            recording.recordingLength = this.recordingLength;*/
-
             this.repositoryService.postRecording(recording).subscribe(r => console.log(r));
         };
     }
