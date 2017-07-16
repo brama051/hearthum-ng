@@ -35,7 +35,7 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
         });
     }
 
-    private handlePostError(e) {
+    public handlePostError(e) {
         console.log('--- error ---');
         console.log(e);
     }
