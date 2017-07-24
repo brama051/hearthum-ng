@@ -10,7 +10,8 @@ import {RecordingResponse} from "../common/recording-response";
 
 @Injectable()
 export class RepositoryService {
-    private repositoryURL = 'http://localhost:8080/hearthum';
+    // private repositoryURL = 'http://localhost:8080/hearthum';
+    private repositoryURL = 'https://hearthum-backend.herokuapp.com/hearthum';
 
     constructor(private http: Http) {
     }
