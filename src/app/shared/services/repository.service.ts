@@ -62,6 +62,8 @@ export class RepositoryService {
         formData.append('recordingLength', recording.recordingLength);
         formData.append('comment', recording.comment);
 
+        console.log(recording);
+
         return this.http
             .post(`${this.repositoryURL}/recordings`,  formData)
             .map((response: Response) => response.json());
