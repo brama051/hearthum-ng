@@ -152,6 +152,7 @@ export class RecorderComponent implements OnInit {
         this.wavesurfer.destroy();
         this.playbackSpeed = 1;
         this.visualizerZoom = 100;
+        this.chunks = [];
     }
 
     // wavesurfer zoom method
