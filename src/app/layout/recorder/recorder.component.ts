@@ -44,7 +44,7 @@ export class RecorderComponent implements OnInit {
                 console.log(this.chunks);
                 this.wavesurfer.loadBlob(blob);
                 this.recordingFile = blob;
-                // this.chunks = [];
+                this.chunks = [];
             };
 
             this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
