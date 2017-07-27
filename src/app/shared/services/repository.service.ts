@@ -69,7 +69,7 @@ export class RepositoryService {
         formData.append('recordingLength', recording.recordingLength);
         formData.append('comment', recording.comment);
 
-        console.log(recording);
+        // console.log(recording);
 
         return this.http
             .post(`${this.repositoryURL}/recordings`,  formData, options)
@@ -100,7 +100,7 @@ export class RepositoryService {
     };
 
     private setUserHeader(headers: Headers): Headers {
-        if (headers = null) {
+        if (headers == null) {
             headers = new Headers();
         }
         headers.append('userEmail', localStorage.getItem('userEmail'));
