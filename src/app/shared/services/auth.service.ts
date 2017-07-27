@@ -12,7 +12,7 @@ export class AuthService {
         audience: 'https://hearthum.eu.auth0.com/userinfo',
         /*redirectUri: 'https://hearthum-ng.herokuapp.com/callback',*/
         redirectUri: 'http://localhost:4200/callback',
-        scope: 'openid profile',
+        scope: 'openid profile email',
         leeway: 30
     });
     userProfile: any;
