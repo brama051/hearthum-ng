@@ -7,13 +7,14 @@ import {Recording} from '../models/recording';
 import {PagedResponse} from '../common/paged-response';
 import {RecordingDto} from '../common/dto/recording-dto';
 import {RecordingResponse} from '../common/recording-response';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class RepositoryService {
     // private repositoryURL = 'http://localhost:8080/hearthum';
      private repositoryURL = 'https://hearthum-backend.herokuapp.com/hearthum';
 
-    constructor(private http: Http) {
+    constructor(private http: Http, auth: AuthService) {
     }
 
     // --- user methods -------------------------------------------------------
@@ -31,20 +32,25 @@ export class RepositoryService {
 
     // --- recording methods --------------------------------------------------
     public getRecording(id: string): Observable<RecordingResponse> {
+        const options = new RequestOptions({
+            headers: this.setUserHeader(null)
+        });
         return this.http
-            .get(`${this.repositoryURL}/recordings/${id}`)
+            .get(`${this.repositoryURL}/recordings/${id}`, options)
             .map((response: Response) => response.json() as RecordingResponse);
     }
 
     public getRecordingPage(page: number, size: number): Observable<PagedResponse<RecordingDto>> {
+        const options = new RequestOptions({
+            headers: this.setUserHeader(null)
+        });
         return this.http
-            .get(`${this.repositoryURL}/recordings?page=${page}&size=${size}`)
+            .get(`${this.repositoryURL}/recordings?page=${page}&size=${size}`, options)
             .map((response: Response) => response.json() as PagedResponse<RecordingDto>);
     }
 
     public postRecording(recording: Recording): Observable<any> {
-        const headers: Headers = new Headers();
-        headers.append('Content-Type', 'application/json; multipart/form-data;');
+        const headers = this.setUserHeader(null);
         const options = new RequestOptions({
             headers: headers
         });
@@ -66,7 +72,7 @@ export class RepositoryService {
         console.log(recording);
 
         return this.http
-            .post(`${this.repositoryURL}/recordings`,  formData)
+            .post(`${this.repositoryURL}/recordings`,  formData, options)
             .map((response: Response) => response.json());
     }
 
@@ -92,5 +98,13 @@ export class RepositoryService {
         };
         reader.readAsDataURL(blob);
     };
+
+    private setUserHeader(headers: Headers): Headers {
+        if (headers = null) {
+            headers = new Headers();
+        }
+        headers.append('userEmail', localStorage.getItem('userEmail'));
+        return headers;
+    }
 
 }

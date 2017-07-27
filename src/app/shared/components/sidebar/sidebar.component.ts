@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
         } else {
             this.auth.getProfile((err, profile) => {
                 this.profile = profile;
+                localStorage.setItem('userEmail', profile.email);
             });
         }
     }
