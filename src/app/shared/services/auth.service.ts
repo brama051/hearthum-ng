@@ -10,8 +10,8 @@ export class AuthService {
         domain: 'hearthum.eu.auth0.com',
         responseType: 'token id_token',
         audience: 'https://hearthum.eu.auth0.com/userinfo',
-        /*redirectUri: 'https://hearthum-ng.herokuapp.com/callback',*/
-        redirectUri: 'http://localhost:4200/callback',
+        redirectUri: 'https://hearthum-ng.herokuapp.com/callback',
+        /*redirectUri: 'http://localhost:4200/callback',*/
         scope: 'openid profile email',
         leeway: 30
     });
