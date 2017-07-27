@@ -6,12 +6,12 @@ import {User} from '../models/user';
 import {Recording} from '../models/recording';
 import {PagedResponse} from '../common/paged-response';
 import {RecordingDto} from '../common/dto/recording-dto';
-import {RecordingResponse} from "../common/recording-response";
+import {RecordingResponse} from '../common/recording-response';
 
 @Injectable()
 export class RepositoryService {
-    private repositoryURL = 'http://localhost:8080/hearthum';
-    // private repositoryURL = 'https://hearthum-backend.herokuapp.com/hearthum';
+    // private repositoryURL = 'http://localhost:8080/hearthum';
+     private repositoryURL = 'https://hearthum-backend.herokuapp.com/hearthum';
 
     constructor(private http: Http) {
     }
