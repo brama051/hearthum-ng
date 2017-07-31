@@ -1,44 +1,6 @@
-<app-filter></app-filter>
-<!--<div class="input-group bottom-offset">-->
-    <!--<div ngbDropdown class="input-group-btn d-inline-block" ngbTooltip="Sort direction" placement="right">-->
-        <!--<button class="btn btn-secondary" id="dropdownMenu2" ngbDropdownToggle><i class="fa fa-sort"></i></button>-->
-        <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
-            <!--<button class="dropdown-item active"><i class="fa fa-long-arrow-up"></i> Order Ascending</button>-->
-            <!--<button class="dropdown-item"><i class="fa fa-long-arrow-down"></i> Order Descending</button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div ngbDropdown class="input-group-btn d-inline-block" ngbTooltip="Filter criteria" placement="right">-->
-        <!--<button class="btn btn-secondary" id="dropdownMenu1" ngbDropdownToggle>-->
-            <!--<i class="fa fa-filter"></i>-->
-        <!--</button>-->
-        <!--<div class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
-            <!--<button class="dropdown-item">Patient name</button>-->
-            <!--<button class="dropdown-item">Recording date</button>-->
-            <!--<button class="dropdown-item">Recording length</button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="...">-->
-    <!--<span class="input-group-btn" ngbTooltip="Reset all filters" placement="left">-->
-        <!--<button class="btn btn-secondary" type="button"><i class="fa fa-refresh"></i></button>-->
-    <!--</span>-->
-<!--</div>-->
+<app-filter (change)="handleFilterChange()"></app-filter>
 
 <app-card *ngFor="let r of recordingPage?.content;" [recording]="r"></app-card>
-<!--
-<div class="card">
-    <div class="card-block">
-        <h4 class="card-title">Card title</h4>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-    </div>
-</div>
--->
-<!--<div class="alert alert-info">
-    <b>Current page: </b>{{advancedPagination}}
-</div>-->
 
 <ngb-pagination [collectionSize]="recordingPage?.totalElements" [(page)]="page" [(pageSize)]="pageSize" [maxSize]="4"
                 [boundaryLinks]="false" (pageChange)="handlePageChange()"></ngb-pagination>

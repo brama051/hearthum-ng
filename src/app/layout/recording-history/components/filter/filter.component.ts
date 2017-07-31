@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {RecordingFilter} from '../../../../shared/models/recording-filter';
 
 @Component({
     selector: 'app-filter',
@@ -7,11 +8,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class FilterComponent implements OnInit {
     public isCollapsed = true;
+    public recordingFilter: RecordingFilter;
+    @Output() change: EventEmitter<RecordingFilter> = new EventEmitter<RecordingFilter>();
 
     constructor() {
+        this.recordingFilter = new RecordingFilter('', false, 'patientName', 'descending');
     }
 
     ngOnInit() {
+    }
+
+    apply() {
+        this.change.emit(this.recordingFilter);
+        this.isCollapsed = true;
     }
 
 }

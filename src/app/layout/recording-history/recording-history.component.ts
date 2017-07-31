@@ -1,9 +1,10 @@
-import {ApplicationRef, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ApplicationRef, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {RepositoryService} from '../../shared/services/repository.service';
 import {PagedResponse} from '../../shared/common/paged-response';
 import {RecordingDto} from '../../shared/common/dto/recording-dto';
 import {RecordingPage} from '../../shared/common/recording-page';
 import {Recording} from '../../shared/models/recording';
+import {FilterComponent} from "./components/filter/filter.component";
 
 @Component({
     selector: 'app-recording-history',
@@ -16,8 +17,10 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
     public pageSize = 10;
     public page = 1;
 
-    constructor(private changeDetector: ChangeDetectorRef, private repositoryService: RepositoryService) {
+    @ViewChild(FilterComponent) filterComponent: FilterComponent;
 
+
+    constructor(private changeDetector: ChangeDetectorRef, private repositoryService: RepositoryService) {
     }
 
     ngOnInit() {
@@ -28,6 +31,7 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
     }
 
     private loadPage() {
+        console.log(this.filterComponent.recordingFilter);
         this.repositoryService.getRecordingPage(this.page - 1, this.pageSize).subscribe((d) => {
             this.recordingPage = d;
             console.log(d);
@@ -49,4 +53,14 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
         this.loadPage();
     }
 
-}
+    public handleFilterChange() {
+        console.log('--- filter changed ---');
+        this.resetPageSettings();
+        this.loadPage();
+    }
+
+    private resetPageSettings() {
+        this.pageSize = 10;
+        this.page = 1;
+    }
+ }
