@@ -9,6 +9,7 @@ import {Recording} from '../../../../shared/models/recording';
 export class CardComponent implements OnInit, OnChanges {
 
     @Input() recording: Recording;
+
     constructor() {
     }
 

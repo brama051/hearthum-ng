@@ -29,7 +29,8 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
 
     private loadPage() {
         this.repositoryService.getRecordingPage(this.page - 1, this.pageSize).subscribe((d) => {
-            this.recordingPage = d; console.log(d);
+            this.recordingPage = d;
+            console.log(d);
             this.pageSize = this.recordingPage.size;
             this.page = this.recordingPage.number + 1;
         });
