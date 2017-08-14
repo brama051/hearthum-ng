@@ -8,6 +8,7 @@ import {CardComponent} from './components/card/card.component';
 import {RepositoryService} from '../../shared/services/repository.service';
 import {FilterComponent} from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
+import { AnalysisModalComponent } from './components/analysis-modal/analysis-modal.component';
 
 @NgModule({
     imports: [
@@ -15,9 +16,8 @@ import {FormsModule} from '@angular/forms';
         RecordingHistoryRoutingModule,
         NgbModule.forRoot(),
         FormsModule
-
     ],
-    declarations: [RecordingHistoryComponent, CardComponent, FilterComponent],
+    declarations: [RecordingHistoryComponent, CardComponent, FilterComponent, AnalysisModalComponent],
     providers: [RepositoryService]
 })
 export class RecordingHistoryModule {

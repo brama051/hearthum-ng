@@ -19,7 +19,7 @@ export function HttpLoaderFactory(http: Http) {
 @NgModule({
     declarations: [
         AppComponent,
-        CallbackComponent,
+        CallbackComponent
     ],
     imports: [
         BrowserModule,

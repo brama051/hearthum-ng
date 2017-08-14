@@ -1,0 +1,42 @@
+<ng-template #childModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Recording analysis</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h4 class="card-title"><i class="fa fa-user-circle"></i> {{recording?.patientName || "John Doe"}}</h4>
+        <h6 class="card-subtitle mb-2">
+            <span class="text-muted"><i class="fa fa-envelope-o"></i> Email:</span>
+            <a *ngIf="recording && recording.patientEmail;else unknown" href="mailto:{{ recording?.patientEmail }}"
+               class="pull-right">{{ recording?.patientEmail }}</a>
+            <ng-template #unknown>
+                <span class="pull-right">unknown</span>
+            </ng-template>
+        </h6>
+        <h6 class="card-subtitle mb-2"><span class="text-muted"><i class="fa fa-calendar-o"></i> Date:</span> <span
+            class="pull-right">{{recording?.recordingDateTime}}</span></h6>
+        <h6 class="card-subtitle mb-2"><span class="text-muted"><i class="fa fa-clock-o"></i> Length:</span> <span
+            class="pull-right">{{recording?.recordingLength | number : '1.2-2'}}s</span></h6>
+
+        <ul class="list-group">
+            <li *ngFor="let a of analysisList; let i = index" class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="{'active': a.analysisOutcome }">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        <span class="badge badge-danger" *ngIf="a.analysisOutcome">POSITIVE</span>
+                        <span class="badge badge-default" *ngIf="!a.analysisOutcome">NEGATIVE</span>
+                    </h5>
+                    <small>{{a.analysisDateTime}}</small>
+                </div>
+                <p class="mb-1" *ngIf="a.analysisComment">{{a.analysisComment}}</p>
+                <small *ngIf="a.analysisTechnology">Technology: {{a.analysisTechnology}}</small>
+                <small *ngIf="a.analyzer.email">Analyzer: {{ a.analyzer.name ? a.analyzer.name : '' }} {{a.analyzer.email}} </small>
+            </li>
+        </ul>
+        <hr>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>

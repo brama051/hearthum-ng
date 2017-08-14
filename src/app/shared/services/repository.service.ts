@@ -8,11 +8,13 @@ import {PagedResponse} from '../common/paged-response';
 import {RecordingDto} from '../common/dto/recording-dto';
 import {RecordingResponse} from '../common/recording-response';
 import {AuthService} from './auth.service';
+import {RecordingFilter} from '../models/recording-filter';
+import {AnalysisDto} from '../common/dto/analysis-dto';
 
 @Injectable()
 export class RepositoryService {
     // private repositoryURL = 'http://localhost:8080/hearthum';
-     private repositoryURL = 'https://hearthum-backend.herokuapp.com/hearthum';
+    private repositoryURL = 'https://hearthum-backend.herokuapp.com/hearthum';
 
     constructor(private http: Http, auth: AuthService) {
     }
@@ -40,13 +42,35 @@ export class RepositoryService {
             .map((response: Response) => response.json() as RecordingResponse);
     }
 
-    public getRecordingPage(page: number, size: number): Observable<PagedResponse<RecordingDto>> {
+    public getRecordingPage(page: number, size: number, f: RecordingFilter): Observable<PagedResponse<RecordingDto>> {
+        const options = new RequestOptions({
+            headers: this.setUserHeader(null)
+        });
+        const query = `?page=${page}&size=${size}&filter=${f.filter}&filterByUser=${!f.showOthers}&filterBy=${f.filterBy}&sortType=${f.sortType}`;
+        console.log(query);
+        return this.http
+            .get(`${this.repositoryURL}/recordings${query}`, options)
+            .map((response: Response) => response.json() as PagedResponse<RecordingDto>);
+    }
+
+    public getAnalyzedRecordingPage(page: number, size: number, f: RecordingFilter): Observable<PagedResponse<RecordingDto>> {
+        const options = new RequestOptions({
+            headers: this.setUserHeader(null)
+        });
+        const query = `?page=${page}&size=${size}&filter=${f.filter}&filterByUser=${!f.showOthers}&filterBy=${f.filterBy}&sortType=${f.sortType}&analyzed=true`;
+        console.log(query);
+        return this.http
+            .get(`${this.repositoryURL}/recordings${query}`, options)
+            .map((response: Response) => response.json() as PagedResponse<RecordingDto>);
+    }
+
+    public getRecordingAnalysis(id: number): Observable<AnalysisDto[]> {
         const options = new RequestOptions({
             headers: this.setUserHeader(null)
         });
         return this.http
-            .get(`${this.repositoryURL}/recordings?page=${page}&size=${size}`, options)
-            .map((response: Response) => response.json() as PagedResponse<RecordingDto>);
+            .get(`${this.repositoryURL}/recordings/${id}/analysis`, options)
+            .map((response: Response) => response.json() as AnalysisDto[]);
     }
 
     public postRecording(recording: Recording): Observable<any> {

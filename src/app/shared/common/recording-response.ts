@@ -12,5 +12,6 @@ export class RecordingResponse {
     recordingDateTime: string;
     recordingDevice: string;
     comment: string;
+    analysisList;
 
 }

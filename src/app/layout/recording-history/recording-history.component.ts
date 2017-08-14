@@ -1,10 +1,10 @@
-import {ApplicationRef, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {RepositoryService} from '../../shared/services/repository.service';
 import {PagedResponse} from '../../shared/common/paged-response';
 import {RecordingDto} from '../../shared/common/dto/recording-dto';
-import {RecordingPage} from '../../shared/common/recording-page';
+import {FilterComponent} from './components/filter/filter.component';
+import {AnalysisModalComponent} from './components/analysis-modal/analysis-modal.component';
 import {Recording} from '../../shared/models/recording';
-import {FilterComponent} from "./components/filter/filter.component";
 
 @Component({
     selector: 'app-recording-history',
@@ -18,7 +18,7 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
     public page = 1;
 
     @ViewChild(FilterComponent) filterComponent: FilterComponent;
-
+    @ViewChild(AnalysisModalComponent) analysisModal: AnalysisModalComponent;
 
     constructor(private changeDetector: ChangeDetectorRef, private repositoryService: RepositoryService) {
     }
@@ -32,7 +32,7 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
 
     private loadPage() {
         console.log(this.filterComponent.recordingFilter);
-        this.repositoryService.getRecordingPage(this.page - 1, this.pageSize).subscribe((d) => {
+        this.repositoryService.getRecordingPage(this.page - 1, this.pageSize, this.filterComponent.recordingFilter).subscribe((d) => {
             this.recordingPage = d;
             console.log(d);
             this.pageSize = this.recordingPage.size;
@@ -63,4 +63,10 @@ export class RecordingHistoryComponent implements OnInit, OnChanges {
         this.pageSize = 10;
         this.page = 1;
     }
+
+    public cardEventHandler(recording: Recording) {
+        this.analysisModal.open(recording);
+        console.log(recording);
+    }
+
  }

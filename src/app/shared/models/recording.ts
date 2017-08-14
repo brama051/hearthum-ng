@@ -13,6 +13,7 @@ export class Recording implements RecordingDto {
     recordingDevice: string;
     comment: string;
     content: Blob;
+    analysisList;
 
     constructor(content: Blob) {
         this.content = content;

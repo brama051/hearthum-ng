@@ -1,9 +1,10 @@
 <app-filter (change)="handleFilterChange()"></app-filter>
 
-<app-card *ngFor="let r of recordingPage?.content;" [recording]="r"></app-card>
+<app-card *ngFor="let r of recordingPage?.content;" [recording]="r" (diagnosticsEmitter)="cardEventHandler($event)"></app-card>
 
 <ngb-pagination [collectionSize]="recordingPage?.totalElements" [(page)]="page" [(pageSize)]="pageSize" [maxSize]="4"
                 [boundaryLinks]="false" (pageChange)="handlePageChange()"></ngb-pagination>
 
-
+<!--<button class="btn btn-block" (click)="openModal()">Aaaa</button>-->
+<app-analysis-modal></app-analysis-modal>
 
