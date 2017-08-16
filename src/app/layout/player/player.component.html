@@ -4,6 +4,55 @@
 <nav class="navbar fixed-bottom navbar-light" style="z-index: 900;">
     <div class="container w-100">
         <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col small">
+                        <strong>Recording</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col small"><span>{{recording?.recordingDateTime}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col small"><span>{{recording?.recordingPosition}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col small"><span>{{recording?.recordingDevice}}</span></div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col small">
+                        <strong class="pull-right">Patient</strong>
+                    </div>
+                </div>
+                <div class="row" *ngIf="recording.patientName">
+                    <div class="col small"><span class="pull-right">{{recording?.patientName}}</span></div>
+                </div>
+                <div class="row" *ngIf="recording.patientEmail">
+                    <div class="col small"><span class="pull-right">{{recording?.patientEmail}}</span></div>
+                </div>
+                <div class="row" *ngIf="recording.patientSex">
+                    <div class="col small"><span class="pull-right">{{recording?.patientSex}}</span></div>
+                </div>
+                <div class="row" *ngIf="recording.patientAge">
+                    <div class="col small"><span class="pull-right">{{recording?.patientAge}} yr</span></div>
+                </div>
+                <div class="row" *ngIf="recording.patientWeight">
+                    <div class="col small"><span class="pull-right">{{recording?.patientWeight}} kg</span></div>
+                </div>
+                <div class="row" *ngIf="recording.patientHeight">
+                    <div class="col small"><span class="pull-right">{{recording?.patientHeight}} cm</span></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-4">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
             <div class="col-4">
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -42,21 +91,20 @@
             <div class="col">&nbsp;</div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col-9 mx-auto">
                 <div class="btn-group w-100" role="group">
                     <!--Player-->
-                    <button type="button" class="btn btn-secondary w-25"
-                            (click)="cmdOpenSaveDialog()"><i class="fa fa-pencil"></i>
-                    </button>
-                    <button type="button" class="btn btn-secondary w-50" *ngIf="!playingActive"
+                    <!--<button type="button" class="btn btn-secondary w-25"
+                            (click)="cmdOpenSaveDialog()"><i class="fa fa-info"></i>
+                    </button>-->
+                    <button type="button" class="btn btn-secondary w-100" *ngIf="!playingActive"
                             (click)="cmdPlayerPlay()"><i class="fa fa-play"></i> Play
                     </button>
-                    <button type="button" class="btn btn-secondary w-50 active" *ngIf="playingActive"
+                    <button type="button" class="btn btn-secondary w-100 active" *ngIf="playingActive"
                             (click)="cmdPlayerPause()"><i class="fa fa-pause"></i> Pause
                     </button>
-                    <button type="button" class="btn btn-secondary w-25"
-                            (click)="cmdDiscardRecording()"><i class="fa fa-trash-o"></i>
-                    </button>
+                    <!--<button type="button" class="btn btn-secondary w-25" disabled>
+                    </button>-->
                 </div>
             </div>
         </div>

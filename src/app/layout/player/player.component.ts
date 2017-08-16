@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PlayerComponent implements OnInit {
     private recordingId: string;
-    private recording: Recording;
+    private recording: Recording = new Recording(null);
     // -- player state --------------------------------------------------------
     public playingActive = false;
     // -- recorder objects ----------------------------------------------------
@@ -64,7 +64,19 @@ export class PlayerComponent implements OnInit {
                     const blob = new Blob([byteArray], { 'type': 'audio/wav;' });
 
                     this.wavesurfer.loadBlob(blob);
+                    console.log(d);
 
+                    this.recording = new Recording(null);
+                    this.recording.recordingDateTime = d.recordingDateTime;
+                    this.recording.patientAge = d.patientAge;
+                    this.recording.patientWeight = d.patientWeight;
+                    this.recording.patientHeight = d.patientHeight;
+                    this.recording.patientSex = d.patientSex;
+                    this.recording.patientEmail = d.patientEmail;
+                    this.recording.patientName = d.patientName;
+
+                    this.recording.recordingPosition = d.recordingPosition;
+                    this.recording.recordingDevice = d.recordingDevice;
                 });
             });
 
