@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PlayerComponent implements OnInit {
     private recordingId: string;
-    private recording: Recording = new Recording(null);
+    public recording: Recording = new Recording(null);
     // -- player state --------------------------------------------------------
     public playingActive = false;
     // -- recorder objects ----------------------------------------------------
