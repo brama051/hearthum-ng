@@ -69,7 +69,7 @@ export class RepositoryService {
             headers: this.setUserHeader(null)
         });
         return this.http
-            .get(`${this.repositoryURL}/recordings/${id}/analysis`, options)
+            .get(`${this.repositoryURL}/recordings/${id}/analyses`, options)
             .map((response: Response) => response.json() as AnalysisDto[]);
     }
 
