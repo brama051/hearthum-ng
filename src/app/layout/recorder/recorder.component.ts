@@ -4,7 +4,6 @@ declare const navigator: any;
 declare const MediaRecorder: any;
 import wavesurfer from 'wavesurfer.js';
 import {RepositoryService} from '../../shared/services/repository.service';
-import {Recording} from '../../shared/models/recording';
 
 
 @Component({
@@ -62,7 +61,7 @@ export class RecorderComponent implements OnInit {
     private saveBlob() {
         const reader = new FileReader();
         reader.readAsDataURL(this.recordingFile);
-        reader.onloadend = () => {;
+        reader.onloadend = () => {
             const recording = this.saveModal.recording; // new Recording(this.recordingFile);
             recording.content = this.recordingFile;
             recording.recordingLength = this.recordingLength;
